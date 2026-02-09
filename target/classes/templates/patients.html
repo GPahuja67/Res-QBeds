@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Patients</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('copy-space-medical-desk-with-stethoscope_23-2148519746.jpg') no-repeat center center/cover;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(12px);
+      padding: 12px 40px;
+      border-radius: 50px;
+      margin: 20px auto;
+      width: 85%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      color: #222;
+      transition: 0.3s;
+    }
+
+    nav a:hover { color: #5a5af0; }
+
+    .btn {
+      padding: 8px 20px;
+      background: linear-gradient(135deg,#5a9df0,#6f5af0);
+      color: white !important;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .btn:hover { opacity: 0.85; }
+
+    h1 { text-align: center; color: #3a4aa8; margin-top: 40px; }
+
+    table {
+      width: 90%;
+      margin: 40px auto;
+      border-collapse: collapse;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td { padding: 12px; text-align: center; border-bottom: 1px solid #ccc; }
+    th { background: #6f5af0; color: white; }
+    tr:hover { background: rgba(200,200,255,0.3); transition: 0.3s; }
+
+    /* Discharge button style */
+    .btn-danger {
+      background: #dc3545 !important;
+      color: white !important;
+      border-radius: 25px;
+      padding: 6px 15px;
+      font-size: 14px;
+    }
+
+    .btn-danger:hover {
+      background: #c82333 !important;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(10px);
+      color: #333;
+      font-size: 0.9em;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      animation: fadeInUp 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div>
+      <a href="/">Home</a>
+      <a href="/hospitals/ui">Hospitals</a>
+      <a href="/patients/ui">Patients</a>
+    </div>
+    <a href="/admit" class="btn">Admit Patient</a>
+  </nav>
+
+  <h1>Patients</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Age</th><th>Gender</th>
+        <th>Disease</th><th>Ward</th><th>Floor</th>
+        <th>Bed</th><th>Admit Date</th><th>Admit Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="patient : ${patients}">
+        <td th:text="${patient.id}"></td>
+        <td th:text="${patient.name}"></td>
+        <td th:text="${patient.age}"></td>
+        <td th:text="${patient.gender}"></td>
+        <td th:text="${patient.disease}"></td>
+        <td th:text="${patient.ward}"></td>
+        <td th:text="${patient.floorNumber}"></td>
+        <td th:text="${patient.bedNumber}"></td>
+        <td th:text="${patient.admittedDate}"></td>
+        <td th:text="${patient.admittedTime}"></td>
+        <td>
+          <!-- Discharge button -->
+          <a th:href="@{'/patients/discharge/' + ${patient.id}}" 
+             class="btn btn-danger"
+             onclick="return confirm('Are you sure you want to discharge this patient?');">
+            Discharge
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <footer>&copy; 2025 Hospital Bed Allocation | All Rights Reserved</footer>
+</body>
+</html>

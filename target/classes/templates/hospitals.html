@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hospitals</title>
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif;
+      background: url('copy-space-medical-desk-with-stethoscope_23-2148519746.jpg') no-repeat center center/cover; }
+    nav { display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.25); backdrop-filter: blur(12px);
+      padding: 12px 40px; border-radius: 50px; margin: 20px auto;
+      width: 85%; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    nav a { text-decoration: none; margin: 0 15px; font-weight: 500; color: #222; transition: 0.3s; }
+    nav a:hover { color: #5a5af0; }
+    .btn { padding: 8px 20px; background: linear-gradient(135deg,#5a9df0,#6f5af0); color: white !important; border-radius: 25px; }
+    h1 { text-align: center; color: #3a4aa8; margin-top: 40px; }
+    table { width: 80%; margin: 40px auto; border-collapse: collapse;
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(10px);
+      border-radius: 12px; overflow: hidden; }
+    th, td { padding: 15px; text-align: center; border-bottom: 1px solid #ccc; }
+    th { background: #6f5af0; color: white; }
+    tr:hover { background: rgba(200,200,255,0.3); transition: 0.3s; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div>
+      <a href="/">Home</a>
+      <a href="/hospitals/ui">Hospitals</a>
+      <a href="/patients">Patients</a>
+    </div>
+    <a href="/admit" class="btn">Admit Patient</a>
+  </nav>
+  <h1>Hospitals</h1>
+  <table>
+    <tr>
+      <th>ID</th><th>Name</th><th>Location</th><th>Total Beds</th><th>Available Beds</th>
+    </tr>
+    <tr th:each="hospital : ${hospitals}">
+      <td th:text="${hospital.id}"></td>
+      <td th:text="${hospital.name}"></td>
+      <td th:text="${hospital.location}"></td>
+      <td th:text="${hospital.totalBeds}"></td>
+      <td th:text="${hospital.availableBeds}"></td>
+    </tr>
+  </table>
+  <footer>
+    <p>&copy; 2025 Hospital Bed Allocation | All Rights Reserved</p>
+  </footer>
+
+  <style>
+    footer {
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(10px);
+      color: #333;
+      font-size: 0.9em;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      animation: fadeInUp 1s ease-in-out;
+    }
+  </style>
+
+</body>
+</html>

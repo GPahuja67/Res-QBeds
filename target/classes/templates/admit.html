@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admit Patient</title>
+  <style>
+    body {
+      margin: 0; font-family: 'Segoe UI', sans-serif;
+      background: #eaf6ff url('your-bg-image.jpg') no-repeat center center/cover;
+    }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
+      padding: 12px 40px; border-radius: 50px; margin: 20px auto;
+      width: 85%; box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    nav a {
+      text-decoration: none; margin: 0 15px; font-weight: 600; color: #2d3a66;
+      transition: 0.3s; font-size: 1.05em;
+    }
+    nav a:hover { color: #4b72ff; }
+    .btn {
+      padding: 8px 20px; background: linear-gradient(135deg,#4b72ff,#6f90f7);
+      color: white !important; border-radius: 25px;
+    }
+    h1 {
+      text-align: center; color: #2d3a66; margin-top: 30px; font-size: 2.2em;
+    }
+    form {
+      width: 50%; margin: 30px auto; padding: 30px;
+      background: white; border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease;
+    }
+    label {
+      display: block; margin-bottom: 8px; font-weight: 600; color: #2d3a66;
+    }
+    input, select {
+      width: 100%; padding: 12px; margin-bottom: 20px;
+      border-radius: 12px; border: 1px solid #ccd9f5;
+      font-size: 1em; outline: none;
+      transition: 0.3s;
+    }
+    input:focus, select:focus {
+      border-color: #4b72ff; box-shadow: 0 0 6px rgba(75,114,255,0.4);
+    }
+    button {
+      padding: 14px 35px; border: none; border-radius: 25px;
+      background: linear-gradient(135deg,#4b72ff,#6f90f7);
+      color: white; font-size: 1.05em; cursor: pointer; font-weight: 600;
+      transition: 0.3s; display: block; margin: auto;
+    }
+    button:hover { transform: translateY(-3px); }
+    .error {
+      color: #fff;
+      background: #ff4b4b;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(255,0,0,0.2);
+      animation: fadeIn 0.6s ease;
+    }
+    footer {
+      text-align: center; padding: 15px; margin-top: 40px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 20px 20px 0 0; color: #333;
+      font-size: 0.9em; box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+    }
+    @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+  </style>
+</head>
+<body>
+  <nav>
+    <div>
+      <a href="/">Home</a>
+      <a href="/hospitals/ui">Hospitals</a>
+      <a href="/patients/ui">Patients</a>
+    </div>
+    <a href="/admit" class="btn">Admit Patient</a>
+  </nav>
+
+  <h1>Admit Patient</h1>
+
+  <!-- 🔴 Error Message Section -->
+  <div th:if="${errorMessage}" class="error" th:text="${errorMessage}"></div>
+
+  <form th:action="@{/admit}" method="post" th:object="${patient}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" th:field="*{age}" required>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" th:field="*{gender}" required>
+      <option value="">-- Select --</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label for="disease">Disease:</label>
+    <input type="text" id="disease" th:field="*{disease}" required>
+
+    <label for="hospitalId">Hospital ID:</label>
+    <input type="number" id="hospitalId" th:field="*{hospitalId}" required>
+
+    <label for="ward">Ward:</label>
+    <input type="text" id="ward" th:field="*{ward}" placeholder="ICU, General, etc." required>
+
+    <label for="bedNumber">Bed Number:</label>
+    <input type="text" id="bedNumber" th:field="*{bedNumber}" required>
+
+    <label for="floorNumber">Floor Number:</label>
+    <input type="number" id="floorNumber" th:field="*{floorNumber}" required>
+
+    <button type="submit">Admit</button>
+  </form>
+
+  <footer>
+    <p>&copy; 2025 Hospital Bed Allocation | All Rights Reserved</p>
+  </footer>
+</body>
+</html>

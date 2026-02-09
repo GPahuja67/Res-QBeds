@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hospital Bed Allocation - Home</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('copy-space-medical-desk-with-stethoscope_23-2148519746.jpg') no-repeat center center/cover;
+      color: #2c3e50;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 14px 50px;
+      border-radius: 50px;
+      margin: 25px auto;
+      width: 85%;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    nav a {
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 500;
+      color: #1e3d59;
+      font-size: 1.05em;
+    }
+
+    nav a:hover {
+      color: #557a95;
+    }
+
+    .btn {
+      padding: 10px 22px;
+      background: linear-gradient(135deg, #a8dadc, #457b9d);
+      color: white !important;
+      border-radius: 25px;
+      font-weight: 600;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: left;
+      margin-top: 100px;
+      padding: 60px;
+      max-width: 650px;
+      margin-left: 8%; /* thoda center ki taraf shift */
+    }
+
+    .hero h1 {
+      font-size: 3.8em; /* thoda bada */
+      font-weight: 800;
+      color: #1d3557;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.15em;
+      margin: 15px 0 25px 0;
+      color: #333;
+      line-height: 1.6em;
+    }
+
+    .hero button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #bde0fe, #a2d2ff);
+      color: #1d3557;
+      font-size: 1.05em;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .hero button:hover {
+      background: linear-gradient(135deg, #a2d2ff, #bde0fe);
+      transform: scale(1.03);
+    }
+
+    /* Doctors Section (hidden initially) */
+    .doctors {
+      display: none; /* default hide */
+      justify-content: center;
+      gap: 25px;
+      margin: 80px auto;
+      max-width: 85%;
+      flex-wrap: wrap;
+    }
+
+    .doctor-card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      width: 280px;
+      text-align: center;
+      position: relative;
+    }
+
+    .doctor-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+
+    .doctor-card h3 {
+      margin-bottom: 10px;
+      color: #1d3557;
+    }
+
+    .doctor-card p {
+      font-size: 0.95em;
+      color: #333;
+      line-height: 1.4em;
+      background: #f8f9fa;
+      padding: 12px;
+      border-radius: 12px;
+      font-style: italic;
+    }
+	
+	/* Testimonials */
+	.testimonials {
+	  padding: 80px 20px;
+	  text-align: center;
+	  background: rgba(255, 255, 255, 0.3);
+	  backdrop-filter: blur(10px);
+	  border-radius: 30px;
+	  margin: 60px auto;
+	  width: 90%;
+	  max-width: 1100px;
+	  opacity: 0;
+	  transform: translateY(100px);
+	  transition: all 0.8s ease;
+	}
+
+	.testimonials.show {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+
+	.testimonials h2 {
+	  font-size: 2.2em;
+	  margin-bottom: 40px;
+	  color: #1d3557;
+	}
+
+	.bubble-container {
+	  display: flex;
+	  justify-content: center;
+	  gap: 30px;
+	  flex-wrap: wrap;
+	}
+
+	.bubble {
+	  background: #fff;
+	  border-radius: 50%;
+	  width: 260px;
+	  height: 260px;
+	  padding: 25px;
+	  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  justify-content: center;
+	  transition: transform 0.4s ease;
+	}
+
+	.bubble:hover {
+	  transform: scale(1.05);
+	}
+
+	.bubble img {
+	  width: 70px;
+	  height: 70px;
+	  border-radius: 50%;
+	  object-fit: cover;
+	  margin-bottom: 12px;
+	}
+
+	.bubble p {
+	  font-size: 0.95em;
+	  color: #333;
+	  margin-bottom: 10px;
+	  font-style: italic;
+	}
+
+	.bubble h4 {
+	  color: #457b9d;
+	  font-size: 0.9em;
+	}
+
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 18px;
+      margin-top: auto;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #1e272e;
+      font-size: 0.9em;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div>
+      <a href="/">Home</a>
+      <a href="/hospitals/ui">Hospitals</a>
+      <a href="/patients/ui">Patients</a>
+    </div>
+    <a href="/admit" class="btn">Admit Patient</a>
+  </nav>
+
+  <div class="hero">
+    <h1>ResQBeds</h1>
+    <p>Smart, secure, and seamless bed allocating system—saving lives when every second counts.</p>
+    <button onclick="window.location.href='/hospitals/ui'">Explore Hospitals</button>
+    
+  </div>
+
+  
+  
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <h2>What Our Doctors Say</h2>
+    <div class="bubble-container">
+      <div class="bubble">
+        <img src="Gemini_Generated_Image_thv82uthv82uthv8.png" alt="Dr. Meera Sharma">
+        <p>"ResQBeds ensures critical patients get help faster than ever."</p>
+        <h4>- Dr. Meera Sharma</h4>
+      </div>
+      <div class="bubble">
+        <img src="Gemini_Generated_Image_nl7c1cnl7c1cnl7c.png" alt="Dr. Arjun Patel">
+        <p>"Technology like this bridges the gap between hospitals and lives."</p>
+        <h4>- Dr. Arjun Patel</h4>
+      </div>
+      <div class="bubble">
+        <img src="Gemini_Generated_Image_ml6mtoml6mtoml6m.png" alt="Dr. Kaviyatri Bhatia">
+        <p>"Seamless bed allocation can truly revolutionize emergency care."</p>
+        <h4>- Dr. Kaviyatri Bhatia</h4>
+      </div>
+    </div>
+  </section>
+  <script>
+    window.addEventListener("scroll", function() {
+      const section = document.querySelector(".testimonials");
+      const sectionTop = section.getBoundingClientRect().top;
+      const triggerPoint = window.innerHeight - 100;
+
+      if (sectionTop < triggerPoint) {
+        section.classList.add("show");
+      }
+    });
+  </script>
+
+  <footer>
+    <p>&copy; 2025 Hospital Bed Allocation | All Rights Reserved</p>
+  </footer>
+</body>
+</html>
